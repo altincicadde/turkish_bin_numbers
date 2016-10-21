@@ -38,9 +38,9 @@ module TurkishBinNumbers
     case
     when bin =~ /^(34|37)/
       return "American Express"
-    when bin =~ /^4[0-9]{6,}$/
+    when bin =~ /^4/
       return "Visa"
-    when bin =~ /^5[1-5][0-9]{5,}|222[1-9][0-9]{3,}|22[3-9][0-9]{4,}|2[3-6][0-9]{5,}|27[01][0-9]{4,}|2720[0-9]{3,}$/
+    when bin =~ /^(50|51|52|53|54|55)/
       return "MasterCard"
     when bin =~ /^(55018|5020|5038|5612|5893|6304|6759|6761|6762|6763|0604|6390)/
       return "Maestro"
