@@ -35,15 +35,16 @@ module TurkishBinNumbers
 
   def self.detect_card_type(bin)
     bin = bin.to_s
+    #AMEX MC VISA
     case
     when bin =~ /^(34|37)/
-      return "American Express"
+      return "AMEX"
     when bin =~ /^4/
-      return "Visa"
+      return "VISA"
     when bin =~ /^(50|51|52|53|54|55)/
-      return "MasterCard"
+      return "MC"
     when bin =~ /^(55018|5020|5038|5612|5893|6304|6759|6761|6762|6763|0604|6390)/
-      return "Maestro"
+      return "MAESTRO"
     else
       return nil
     end
