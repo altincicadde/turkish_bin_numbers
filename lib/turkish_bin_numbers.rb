@@ -7,6 +7,11 @@ module TurkishBinNumbers
   file.close
   @data = JSON.parse(data)
 
+  bank_file = File.open(File.join(File.dirname(__FILE__), '/bank_list.json'))
+  bank_data = bank_file.read
+  bank_file.close
+  @bank_data = JSON.parse(bank_data)
+
   def self.get(bin_number)
     bin = @data.detect {|b| bin_number.to_s =~ /^#{b["bin_number"]}/ }
     bin["card_type"] = detect_card_type(bin_number) if bin
@@ -47,6 +52,20 @@ module TurkishBinNumbers
       return "MAESTRO"
     else
       return nil
+    end
+  end
+
+  def self.detect_bank(bin_number=547302)
+    bin = @data.detect {|b| bin_number.to_s =~ /^#{b["bin_number"]}/ }
+    if bin
+      bank = @bank_data.select {|b| b["bank_name"] == bin["bank_name"] }
+      if bank
+        return bank[0]["bank_short_name"]
+      else
+        return "GRN" #default Garanti Bankası
+      end
+    else
+      return "GRN" #default Garanti Bankası
     end
   end
 end
